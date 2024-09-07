@@ -10,7 +10,16 @@ defmodule Issues.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Issues",
-      source_url: "https://github.com/THOTH0101/issues"
+      source_url: "https://github.com/THOTH0101/issues",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -29,7 +38,8 @@ defmodule Issues.MixProject do
       {:httpoison, "~> 2.2"},
       {:poison, "~> 6.0"},
       {:ex_doc, "~> 0.34.2"},
-      {:earmark, "~> 1.4"}
+      {:earmark, "~> 1.4", override: true},
+      {:excoveralls, "~> 0.18.2", only: :test}
     ]
   end
 
